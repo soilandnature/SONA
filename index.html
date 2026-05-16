@@ -470,11 +470,8 @@
 
 <!-- HEADER -->
 <header>
-  <a class="logo" href="#">Maison<em>.</em></a>
+  <a class="logo" href="#">Soil and Nature</a>
   <nav>
-    <a href="#">New In</a>
-    <a href="#">Clothing</a>
-    <a href="#">Accessories</a>
     <a href="#">Sale</a>
   </nav>
   <div class="nav-icons">
@@ -490,160 +487,18 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-tag">Spring — Summer 2025</p>
-  <h1>Quiet <em>luxury,</em><br>every day.</h1>
-  <p>Thoughtfully crafted essentials for the modern wardrobe. Timeless pieces made to last.</p>
-</section>
-
-<!-- FILTER BAR -->
-<div class="filter-bar">
-  <span class="filter-label">Filter</span>
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="clothing">Clothing</button>
-  <button class="filter-btn" data-filter="accessories">Accessories</button>
-  <button class="filter-btn" data-filter="footwear">Footwear</button>
-  <button class="filter-btn" data-filter="sale">On Sale</button>
-</div>
-
-<!-- GRID -->
-<div class="grid-wrapper">
-  <div class="grid-header">
-    <span class="grid-count" id="grid-count">12 items</span>
-    <select class="sort-select" id="sort-select">
-      <option value="featured">Featured</option>
-      <option value="price-asc">Price: low to high</option>
-      <option value="price-desc">Price: high to low</option>
-      <option value="newest">Newest</option>
-    </select>
-  </div>
-  <div class="products-grid" id="products-grid"></div>
-</div>
+  <h1>Coming <em>Soon!</em><br>Your every day Groceries and foods.</h1>
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-logo">Maison.</span>
+  <span class="footer-logo">Soil and Nature.</span>
   <div class="footer-links">
     <a href="#">About</a>
     <a href="#">Shipping</a>
     <a href="#">Returns</a>
     <a href="#">Contact</a>
   </div>
-  <span class="footer-copy">© 2025 Maison</span>
+  <span class="footer-copy">© 2026 Soil and Nature</span>
 </footer>
 
 <div class="toast" id="toast"></div>
-
-<script>
-const products = [
-  { id:1, name:"Linen Overshirt", category:"clothing", price:128, originalPrice:null, rating:4.8, reviews:42, tag:"new", image:"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&q=80" },
-  { id:2, name:"Wide-Leg Trousers", category:"clothing", price:96, originalPrice:148, rating:4.6, reviews:28, tag:"sale", image:"https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=500&q=80" },
-  { id:3, name:"Merino Crew Knit", category:"clothing", price:145, originalPrice:null, rating:4.9, reviews:67, tag:null, image:"https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&q=80" },
-  { id:4, name:"Leather Belt", category:"accessories", price:68, originalPrice:null, rating:4.7, reviews:19, tag:null, image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80" },
-  { id:5, name:"Canvas Tote", category:"accessories", price:54, originalPrice:null, rating:4.5, reviews:33, tag:"new", image:"https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500&q=80" },
-  { id:6, name:"Derby Shoes", category:"footwear", price:210, originalPrice:265, rating:4.8, reviews:51, tag:"sale", image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80" },
-  { id:7, name:"Silk Scarf", category:"accessories", price:82, originalPrice:null, rating:4.4, reviews:14, tag:null, image:"https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=500&q=80" },
-  { id:8, name:"Relaxed Chinos", category:"clothing", price:112, originalPrice:null, rating:4.6, reviews:39, tag:null, image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500&q=80" },
-  { id:9, name:"Suede Loafers", category:"footwear", price:195, originalPrice:null, rating:4.9, reviews:88, tag:"new", image:"https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&q=80" },
-  { id:10, name:"Wool Overcoat", category:"clothing", price:385, originalPrice:490, rating:4.8, reviews:24, tag:"sale", image:"https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=500&q=80" },
-  { id:11, name:"Minimalist Watch", category:"accessories", price:245, originalPrice:null, rating:4.7, reviews:62, tag:null, image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" },
-  { id:12, name:"Chelsea Boots", category:"footwear", price:228, originalPrice:null, rating:4.6, reviews:45, tag:null, image:"https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=500&q=80" },
-];
-
-let cartCount = 0;
-let currentFilter = 'all';
-let wished = new Set();
-
-function renderStars(rating) {
-  const full = Math.floor(rating);
-  const half = rating % 1 >= 0.5 ? 1 : 0;
-  return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(5 - full - half);
-}
-
-function renderProducts(list) {
-  const grid = document.getElementById('products-grid');
-  document.getElementById('grid-count').textContent = list.length + ' item' + (list.length !== 1 ? 's' : '');
-  grid.innerHTML = list.map(p => `
-    <div class="product-card">
-      <div class="card-image">
-        <img src="${p.image}" alt="${p.name}" loading="lazy">
-        ${p.tag ? `<span class="card-tag ${p.tag}">${p.tag === 'new' ? 'New' : 'Sale'}</span>` : ''}
-        <div class="card-actions">
-          <button class="btn-add" onclick="addToCart(${p.id}, this)"data-id="${p.id}">Add to cart</button>
-        </div>
-      </div>
-      <button class="btn-wish ${wished.has(p.id) ? 'wished' : ''}" onclick="toggleWish(${p.id}, this)" aria-label="Wishlist">
-        <svg width="14" height="14" fill="${wished.has(p.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </button>
-      <div class="card-info">
-        <span class="card-category">${p.category}</span>
-        <span class="card-name">${p.name}</span>
-        <div class="card-price-row">
-          <span class="card-price">$${p.price}</span>
-          ${p.originalPrice ? `<span class="card-price-original">$${p.originalPrice}</span>` : ''}
-        </div>
-        <div class="card-rating">
-          <span class="stars">${renderStars(p.rating)}</span>
-          <span class="rating-count">(${p.reviews})</span>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function getFiltered() {
-  let list = currentFilter === 'all' ? products :
-             currentFilter === 'sale' ? products.filter(p => p.tag === 'sale') :
-             products.filter(p => p.category === currentFilter);
-  const sort = document.getElementById('sort-select').value;
-  if (sort === 'price-asc') list = [...list].sort((a,b) => a.price - b.price);
-  if (sort === 'price-desc') list = [...list].sort((a,b) => b.price - a.price);
-  if (sort === 'newest') list = [...list].filter(p => p.tag === 'new').concat(list.filter(p => p.tag !== 'new'));
-  return list;
-}
-
-function addToCart(id, btn) {
-  cartCount++;
-  document.getElementById('cart-count').textContent = cartCount;
-  btn.textContent = 'Added ✓';
-  btn.classList.add('added');
-  setTimeout(() => { btn.textContent = 'Add to cart'; btn.classList.remove('added'); }, 1500);
-  const p = products.find(x => x.id === id);
-  showToast(p.name + ' added to cart');
-}
-
-function toggleWish(id, btn) {
-  if (wished.has(id)) {
-    wished.delete(id);
-    btn.classList.remove('wished');
-    btn.innerHTML = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
-  } else {
-    wished.add(id);
-    btn.classList.add('wished');
-    btn.innerHTML = `<svg width="14" height="14" fill="currentColor" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
-  }
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
-}
-
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    renderProducts(getFiltered());
-  });
-});
-
-document.getElementById('sort-select').addEventListener('change', () => {
-  renderProducts(getFiltered());
-});
-
-renderProducts(getFiltered());
-</script>
-</body>
-</html>
